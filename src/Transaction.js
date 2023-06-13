@@ -3,7 +3,7 @@ import { useFormik} from 'formik';
 import { Card, Row } from 'react-bootstrap';
 
 import { newDate } from './dateTime';
-import { capitalize } from '../helpers/capitalize';
+import { capitalize } from '/capitalize';
 
 const articleStyle = {
     margin: '0 auto',

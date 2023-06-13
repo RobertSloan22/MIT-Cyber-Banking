@@ -22,7 +22,7 @@ function Home() {
           <h5 className="card-title">{currentDateTime.toLocaleString()} {/* This line will display the current date and time */}</h5>
           <h1>Welcome to CyberBank</h1>
           <p className="lead">Your one-stop solution for all your banking needs.</p>
-          <a href="#/CreateAccount/" className="btn btn-primary">Go to Account </a>
+          <a href="#/Login/" className="btn btn-primary">Go to Account </a>
         </div>
       
         <div className="card-footer text-body-secondary">

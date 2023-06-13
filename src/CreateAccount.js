@@ -2,7 +2,6 @@ import React from 'react';
 import { UserContext } from './Context';
 import { Card } from './Context';
 import Bankingcircle from './bankingcircle.jpg';
-import Login from './Login';
 import './CreateAccount.css'
 
 function CreateAccount(){
@@ -11,6 +10,8 @@ function CreateAccount(){
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [loginEmail, setLoginEmail] = React.useState('');
+  const [loginPassword, setLoginPassword] = React.useState('');
 
   const ctx = React.useContext(UserContext);
 
@@ -30,8 +31,16 @@ function CreateAccount(){
 
   function handleCreate(){
     console.log(name,email,password);
-    if (!validate(name,     'name'))     return;
-    if (!validate(email,    'email'))    return;
+    if (!validate(name,     'name')  || name.length < 3 )  {
+      setStatus('Error: Provide name');
+      setTimeout(() => setStatus(''),3000);
+      return;
+    }   
+    if (!validate(email,    'email')  || email.length < 6)  {
+      setStatus('Error: Provide valid email');
+      setTimeout(() => setStatus(''),3000);
+      return;
+    }  
     if (!validate(password, 'password') || password.length < 8) {
       setStatus('Password must be at least 8 characters long');
       setTimeout(() => setStatus(''),3000);
@@ -41,6 +50,17 @@ function CreateAccount(){
     setShow(false);
   }
 
+  function handleLogin() {
+    const user = ctx.users.find(u => u.email === loginEmail && u.password === loginPassword);
+    if (user) {
+      ctx.setLoggedInUser(user);
+      setStatus('Login successful!');
+    } else {
+      setStatus('Invalid email or password');
+    }
+  }
+  
+  
   function clearForm(){
     setName('');
     setEmail('');
@@ -53,12 +73,12 @@ function CreateAccount(){
       <div>
         <h3 className="header-text">CyberBank</h3>
       </div>
-      <div className="grid-item"> {/* Grid Item 1 */}
+      <div className="grid-item">
         <Card
           bgcolor="primary"
           header="Create Account"
           status={status}
-          body={show ? (  // Ternary expression
+          body={show ? (
             <>
             Name<br/>
             <input type="input" className="form-control" id="name" placeholder="Enter name" value={name} onChange={e => setName(e.currentTarget.value)} required /><br/>
@@ -76,8 +96,21 @@ function CreateAccount(){
           )}
         />
       </div>
-      <div className="grid-item"> {/* Grid Item 2 */}
-        <Login />
+      <div className="grid-item">
+        <Card
+          bgcolor="primary"
+          header="Login"
+          status={status}
+          body={(
+            <>
+            Email address<br/>
+            <input type="input" className="form-control" id="loginEmail" placeholder="Enter email" value={loginEmail} onChange={e => setLoginEmail(e.currentTarget.value)} required /><br/>
+            Password<br/>
+            <input type="password" className="form-control" id="loginPassword" placeholder="Enter password" value={loginPassword} onChange={e => setLoginPassword(e.currentTarget.value)} required /><br/>
+            <button type="submit" className="btn btn-light" onClick={handleLogin} disabled={!loginEmail || !loginPassword || loginEmail.length < 6 || loginPassword.length < 8}>Login</button>
+            </>
+          )}
+        />
       </div>
     </div>
   );

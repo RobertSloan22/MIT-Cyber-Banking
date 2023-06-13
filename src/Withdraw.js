@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BalanceContext } from './BalanceContext';
 
 const Withdraw = () => {
-  const { balance, setBalance } = useContext(BalanceContext);
+  const { balance, withdraw } = useContext(BalanceContext);
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -16,11 +16,12 @@ const Withdraw = () => {
     } else if (Number(withdrawAmount) > balance) {
       setErrorMessage('Insufficient balance.');
     } else {
-      setBalance((prevBalance) => prevBalance - Number(withdrawAmount));
+      withdraw(withdrawAmount);
       setSuccessMessage('Withdraw processed successfully.');
       setWithdrawAmount('');
     }
   };
+  
 
   return (
     <div className="container mt-4">
