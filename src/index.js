@@ -11,6 +11,7 @@ import Deposit from './Deposit';
 import Withdraw from './Withdraw';
 import AllData from './AllData';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './Login';
 
 ReactDOM.render(
   <HashRouter>
@@ -26,6 +27,7 @@ ReactDOM.render(
               <Route path="/Deposit/" element={<Deposit />} />
               <Route path="/Withdraw/" element={<Withdraw />} />
               <Route path="/AllData/" element={<AllData />} />
+              <Route path="/Login/" element={<Login />} />
             </Routes>
           </div>
         </BalanceProvider>

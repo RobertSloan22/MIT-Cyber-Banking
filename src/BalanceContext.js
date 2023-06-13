@@ -30,3 +30,4 @@ export const BalanceProvider = ({ children }) => {
     </BalanceContext.Provider>
   );
 };
+export default BalanceContext;

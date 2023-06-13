@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react'; // Added useContext import
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {  } from './BalanceContext';
-
-
+import { BalanceContext } from './BalanceContext'; // Importing BalanceContext
 
 const Deposit = () => {
+  const { balance, deposit } = useContext(BalanceContext); // Use deposit and balance from BalanceContext
   const [depositAmount, setDepositAmount] = useState('');
-  const [balance, setBalance] = useState(0); // Replace with your actual balance data
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -16,7 +14,7 @@ const Deposit = () => {
     } else if (Number(depositAmount) < 0) {
       setErrorMessage('Deposit amount cannot be negative.');
     } else {
-      setBalance((prevBalance) => prevBalance + Number(depositAmount));
+      deposit(depositAmount); // Use deposit function from BalanceContext
       setSuccessMessage('Deposit received successfully.');
       setDepositAmount('');
     }
@@ -56,16 +54,6 @@ const Deposit = () => {
                   />
 
             </div>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={handleDeposit}
-              disabled={!depositAmount}
-            >
-              Deposit
-            </button>
-          </form>
-          <form>
             <button
               type="button"
               className="btn btn-primary"

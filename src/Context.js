@@ -1,11 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 export { Route, Link, Router };
-export const UserContext = React.createContext(null);
+
 export const BalanceContext = React.createContext();
 export const AuthContext = React.createContext();
 
+// user context definition
+export const UserContext = React.createContext({
+  users: [],
+  loggedInUser: null,
+  addUser: (user) => {},
+  setLoggedInUser: (user) => {},
+});
+
+export const UserProvider = ({ children }) => {
+  const [users, setUsers] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  const addUser = (user) => {
+    setUsers((prevUsers) => [...prevUsers, user]);
+  };
+
+  return (
+    <UserContext.Provider
+      value={{
+        users,
+        addUser,
+        loggedInUser,
+        setLoggedInUser,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+};
 
 export function Card(props) {
   function classes() {
