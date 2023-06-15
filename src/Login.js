@@ -3,20 +3,20 @@ import { useFormik } from 'formik';
 import { LogInCard } from './AccountCards';
 import { UserContext } from './Context';
 import { capitalize } from './Capitalize';
-import { Navigate } from 'react-router';
+import CreateAccount from './CreateAccount';
 
 const errorStyle = {
     color: 'red'
 }
 
-const LogIn = ({ setUser }) => {
-    const userContext = useContext(UserContext);
+const LogIn = () => {
+    const { users, setLoggedInUser } = useContext(UserContext);
 
     const validate = values => {
         let errors = {};
         if (!values.emailLogIn) {
             errors.email = 'is required*';
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i
             .test(values.emailLogIn)) {
             errors.email = 'address is invalid*';
         }
@@ -30,7 +30,7 @@ const LogIn = ({ setUser }) => {
     }
 
     const getUser = (email) => {
-        return userContext.users.find(user => user.email === email);
+        return users.find(user => user.email === email);
     }
 
     const formik = useFormik({
@@ -43,15 +43,14 @@ const LogIn = ({ setUser }) => {
             const userLogIn = getUser(values.emailLogIn);
             const userName = capitalize(userLogIn.name);
             if (userLogIn.password === values.pswLogIn) {
-                alert(`LOGGING IN\n\nWelcome back, ${userName}.\n\nAccount ${userLogIn.id} has been successfully loaded.  Your current balance is $${userLogIn.balance.toLocaleString(undefined, {'minimumFractionDigits':2,'maximumFractionDigits':2})}`);
-                setUser(`${userName}, Account Number: ${userLogIn.id}`);
+                alert(`LOGGING IN\\n\\nWelcome back, ${userName}.\\n\\nAccount ${userLogIn.id} has been successfully loaded.  Your current balance is $${userLogIn.balance.toLocaleString(undefined, {'minimumFractionDigits':2,'maximumFractionDigits':2})}`);
+                setLoggedInUser(userLogIn);
                 resetForm();
-                return <Navigate to="/deposit" />; // Redirect to the deposit page
+                return <CreateAccount />; // Redirect to the deposit page
             }
             alert(`Invalid password.`);
         },
     });
-
     return (
         <LogInCard
             header={'Active Account Login?'}
@@ -93,6 +92,7 @@ const LogIn = ({ setUser }) => {
             </form>}
         />
     )
-}
-
-export default LogIn;
+    }
+    
+    export default LogIn;
+    

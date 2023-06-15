@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CustomTooltip from './CustomTooltip';
 import { useState, useEffect } from 'react';
+import { Navbar, Nav } from 'react-bootstrap'; // Importing Bootstrap components
 
 function NavBar(){
 
@@ -19,59 +20,54 @@ function NavBar(){
   
   return(
     <>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light custom-nav">
-      <a className="navbar-brand" href="/Home/">CyberBank</a>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand as={Link} to="/Home/">CyberBank</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Item>
             <CustomTooltip tooltipText="Banking in Cyber-Space">
-              <Link className="nav-link" to="/Home/">CyberBank Home Page</Link>
+              <Nav.Link as={Link} to="/Home/">CyberBank Home Page</Nav.Link>
             </CustomTooltip>
-          </li>
-          <li className="nav-item">
+          </Nav.Item>
+          <Nav.Item>
             <CustomTooltip tooltipText="Become a CyberBank Account Holder">
-              <Link className="nav-link" to="/CreateAccount/">Create Account</Link>
+              <Nav.Link as={Link} to="/CreateAccount/">Create Account</Nav.Link>
             </CustomTooltip>
-          </li>
-          <li className="nav-item">
+          </Nav.Item>
+          <Nav.Item>
             <CustomTooltip tooltipText="Make A deposit into your account">
-              <Link className="nav-link" to="/Deposit/">Deposit</Link>
+              <Nav.Link as={Link} to="/Deposit/">Deposit</Nav.Link>
             </CustomTooltip>
-          </li>
-          <li className="nav-item">
+          </Nav.Item>
+          <Nav.Item>
             <CustomTooltip tooltipText="Make a Withdraw">
-              <Link className="nav-link" to="/Withdraw/">Withdraw</Link>
+              <Nav.Link as={Link} to="/Withdraw/">Withdraw</Nav.Link>
             </CustomTooltip>
-          </li>
-          <li className="nav-item">
+          </Nav.Item>
+          <Nav.Item>
             <CustomTooltip tooltipText="View your Transaction History ">
-              <Link className="nav-link" to="/AllData/">AllData</Link>
+              <Nav.Link as={Link} to="/AllData/">AllData</Nav.Link>
             </CustomTooltip>
-          </li>         <li className="nav-item">
-            <span className="nav-link font-weight-bold text-align-right">{currentDateTime.toLocaleString()}</span>
-          </li>
-        </ul>
-        <ul className="navbar-nav">
-          <li className="nav-item">
+          </Nav.Item>         
+          <Nav.Item>
+            <Nav.Link className="font-weight-bold text-align-right" disabled>{currentDateTime.toLocaleString()}</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <Nav>
+          <Nav.Item>
             <CustomTooltip tooltipText="Login to your Account">
-              <Link className="nav-link" to="/Login/">Login to Account</Link>
+              <Nav.Link as={Link} to="/Login/">Login to Account</Nav.Link>
             </CustomTooltip>
-          </li>
-        </ul>
-        <ul className="navbar-nav">
-          <li className="nav-item">
+          </Nav.Item>
+          <Nav.Item>
             <CustomTooltip tooltipText="Logout from your account">
-              <Link className="nav-link" to="/Logout/">Logout</Link>
+              <Nav.Link as={Link} to="/Logout/">Logout</Nav.Link>
             </CustomTooltip>
-          </li>
-        </ul>
-      </div>
-    </nav>
+          </Nav.Item>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
     </>
   );
 }
