@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-
-export { Route, Link, Router };
 
 export const BalanceContext = React.createContext();
 export const AuthContext = React.createContext();
@@ -28,13 +25,19 @@ export const UserProvider = ({ children }) => {
         users,
         addUser,
         loggedInUser,
-        setLoggedInUser,
+        setLoggedInUser, // pass the function to the context provider
       }}
     >
       {children}
     </UserContext.Provider>
   );
 };
+
+
+
+
+
+
 
 export function Card(props) {
   function classes() {
