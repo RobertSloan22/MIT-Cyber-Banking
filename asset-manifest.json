@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/mit-bank-app/static/css/main.cbefd31e.css",
+    "main.js": "/mit-bank-app/static/js/main.54663295.js",
+    "static/media/cyberbank.jpg": "/mit-bank-app/static/media/cyberbank.d045e75e19f739b1ae78.jpg",
+    "index.html": "/mit-bank-app/index.html",
+    "main.cbefd31e.css.map": "/mit-bank-app/static/css/main.cbefd31e.css.map",
+    "main.54663295.js.map": "/mit-bank-app/static/js/main.54663295.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cbefd31e.css",
+    "static/js/main.54663295.js"
+  ]
+}
